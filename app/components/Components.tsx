@@ -161,11 +161,23 @@ function DepositETH() {
   const [deployedTokenAddress, setDeployedTokenAddress] = useState<string | null>(null);
 
   const handleDeploy = async () => {
-    if (!address || !walletClient) return;
+    if (!address || !walletClient) {
+      console.error("Wallet not connected:", { address, walletClient });
+      await sendNotification({
+        title: "Wallet Not Connected",
+        body: "Please connect your wallet first.",
+      });
+      return;
+    }
 
     try {
       setIsDeploying(true);
       setDeployedTokenAddress(null);
+      
+      console.log("Initializing Clanker SDK with:", {
+        chain: base,
+        wallet: walletClient,
+      });
       
       // Initialize Clanker SDK
       const publicClient = createPublicClient({
@@ -178,18 +190,34 @@ function DepositETH() {
         publicClient,
       });
 
+      console.log("Deploying token with params:", {
+        name: "Book",
+        symbol: "BOOK",
+        image: "ipfs://bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi",
+      });
+
       // Deploy the token
       const tokenAddress = await clanker.deployToken({
         name: "Book",
         symbol: "BOOK",
         image: "ipfs://bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi",
       });
+      
+      console.log("Token deployed successfully:", tokenAddress);
       setDeployedTokenAddress(tokenAddress);
     } catch (error) {
       console.error("Token deployment failed:", error);
+      // Log the full error object
+      if (error instanceof Error) {
+        console.error("Error details:", {
+          name: error.name,
+          message: error.message,
+          stack: error.stack,
+        });
+      }
       await sendNotification({
         title: "Deployment Failed",
-        body: "Failed to deploy token. Please try again.",
+        body: error instanceof Error ? error.message : "Failed to deploy token. Please try again.",
       });
     } finally {
       setIsDeploying(false);
@@ -544,13 +572,6 @@ export function Home({ setActiveTab }: HomeProps) {
         <p className="text-[var(--app-foreground-muted)] mb-4">
           Being content means that you&apos;re satisfied with what you have and who you are.
         </p>
-        <Button 
-          variant="outline" 
-          onClick={() => setActiveTab("features")}
-          className="mt-4"
-        >
-          View Features
-        </Button>
       </Card>
 
       <DepositETH />
