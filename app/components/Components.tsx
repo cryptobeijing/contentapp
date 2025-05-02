@@ -544,6 +544,13 @@ export function Home({ setActiveTab }: HomeProps) {
         <p className="text-[var(--app-foreground-muted)] mb-4">
           Being content means that you&apos;re satisfied with what you have and who you are.
         </p>
+        <Button 
+          variant="outline" 
+          onClick={() => setActiveTab("features")}
+          className="mt-4"
+        >
+          View Features
+        </Button>
       </Card>
 
       <DepositETH />
