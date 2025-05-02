@@ -20,12 +20,13 @@ import { ethers } from "ethers";
 import { Clanker } from 'clanker-sdk';
 import { createPublicClient, createWalletClient, http } from 'viem';
 import { base } from 'viem/chains';
+import Image from 'next/image';
 
 // Add type declaration for window.ethereum
 declare global {
   interface Window {
     ethereum?: {
-      request: (args: { method: string; params?: any[] }) => Promise<any>;
+      request: (args: { method: string; params?: unknown[] }) => Promise<unknown>;
     };
   }
 }
@@ -218,9 +219,11 @@ function DepositETH() {
       <div className="space-y-4">
         <div className="flex flex-col items-center w-full">
           <div className="w-full flex justify-center">
-            <img 
+            <Image 
               src="/jpg/book.jpg" 
               alt="Book" 
+              width={384}
+              height={384}
               className="max-w-full max-h-96 object-contain rounded-lg mb-4 bg-white border border-gray-300 shadow-lg"
             />
           </div>
@@ -311,9 +314,11 @@ function Book2() {
       <div className="space-y-4">
         <div className="flex flex-col items-center w-full">
           <div className="w-full flex justify-center">
-            <img 
+            <Image 
               src="/jpg/salad.jpg" 
               alt="Salad" 
+              width={384}
+              height={384}
               className="max-w-full max-h-96 object-contain rounded-lg mb-4 bg-white border border-gray-300 shadow-lg"
             />
           </div>
@@ -404,9 +409,11 @@ function Book3() {
       <div className="space-y-4">
         <div className="flex flex-col items-center w-full">
           <div className="w-full flex justify-center">
-            <img 
+            <Image 
               src="/jpg/drama.jpg" 
               alt="Drama" 
+              width={384}
+              height={384}
               className="max-w-full max-h-96 object-contain rounded-lg mb-4 bg-white border border-gray-300 shadow-lg"
             />
           </div>
@@ -497,9 +504,11 @@ function Book4() {
       <div className="space-y-4">
         <div className="flex flex-col items-center w-full">
           <div className="w-full flex justify-center">
-            <img 
+            <Image 
               src="/jpg/sea.jpg" 
               alt="Sea" 
+              width={384}
+              height={384}
               className="max-w-full max-h-96 object-contain rounded-lg mb-4 bg-white border border-gray-300 shadow-lg"
             />
           </div>
@@ -542,12 +551,12 @@ function Book4() {
   );
 }
 
-export function Home({ setActiveTab }: HomeProps) {
+export function Home() {
   return (
     <div className="space-y-6 animate-fade-in">
       <Card title="I am content with....">
         <p className="text-[var(--app-foreground-muted)] mb-4">
-          Being content means that you're satisfied with what you have and who you are.
+          Being content means that you&apos;re satisfied with what you have and who you are.
         </p>
       </Card>
 
