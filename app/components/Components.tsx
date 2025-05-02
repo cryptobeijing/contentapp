@@ -1,24 +1,10 @@
 "use client";
 
-import { type ReactNode, useCallback, useMemo, useState } from "react";
+import { type ReactNode, useState } from "react";
 import { useAccount, useWalletClient } from "wagmi";
-import {
-  Transaction,
-  TransactionButton,
-  TransactionToast,
-  TransactionToastAction,
-  TransactionToastIcon,
-  TransactionToastLabel,
-  TransactionError,
-  TransactionResponse,
-  TransactionStatusAction,
-  TransactionStatusLabel,
-  TransactionStatus,
-} from "@coinbase/onchainkit/transaction";
 import { useNotification } from "@coinbase/onchainkit/minikit";
-import { ethers } from "ethers";
 import { Clanker } from 'clanker-sdk';
-import { createPublicClient, createWalletClient, http } from 'viem';
+import { createPublicClient, http } from 'viem';
 import { base } from 'viem/chains';
 import Image from 'next/image';
 
@@ -85,8 +71,8 @@ export function Button({
   );
 }
 
-type CardProps = {
-  title?: string;
+interface CardProps {
+  title: string;
   children: ReactNode;
   className?: string;
   onClick?: () => void;
@@ -166,10 +152,6 @@ export function Features({ setActiveTab }: FeaturesProps) {
     </div>
   );
 }
-
-type HomeProps = {
-  setActiveTab: (tab: string) => void;
-};
 
 function DepositETH() {
   const { address } = useAccount();
