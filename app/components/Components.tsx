@@ -4,7 +4,7 @@ import { type ReactNode, useState } from "react";
 import { useAccount, useWalletClient } from "wagmi";
 import { useNotification } from "@coinbase/onchainkit/minikit";
 import { Clanker } from 'clanker-sdk';
-import { createPublicClient, http, PublicClient as ViemPublicClient, Chain } from 'viem';
+import { createPublicClient, http, PublicClient } from 'viem';
 import { base } from 'viem/chains';
 import Image from 'next/image';
 
@@ -171,7 +171,7 @@ function DepositETH() {
       const publicClient = createPublicClient({
         chain: base,
         transport: http(),
-      }) as any;
+      }) as PublicClient;
 
       const clanker = new Clanker({
         wallet: walletClient,
@@ -266,7 +266,7 @@ function Book2() {
       const publicClient = createPublicClient({
         chain: base,
         transport: http(),
-      }) as any;
+      }) as PublicClient;
 
       const clanker = new Clanker({
         wallet: walletClient,
@@ -361,7 +361,7 @@ function Book3() {
       const publicClient = createPublicClient({
         chain: base,
         transport: http(),
-      }) as any;
+      }) as PublicClient;
 
       const clanker = new Clanker({
         wallet: walletClient,
@@ -456,7 +456,7 @@ function Book4() {
       const publicClient = createPublicClient({
         chain: base,
         transport: http(),
-      }) as any;
+      }) as PublicClient;
 
       const clanker = new Clanker({
         wallet: walletClient,
