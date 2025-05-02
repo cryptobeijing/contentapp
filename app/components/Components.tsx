@@ -533,7 +533,11 @@ function Book4() {
   );
 }
 
-export function Home() {
+type HomeProps = {
+  setActiveTab: (tab: string) => void;
+};
+
+export function Home({ setActiveTab }: HomeProps) {
   return (
     <div className="space-y-6 animate-fade-in">
       <Card title="I am content with....">
